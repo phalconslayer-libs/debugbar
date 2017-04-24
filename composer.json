@@ -1,6 +1,7 @@
 {
     "name": "phalconslayer-libs/debugbar",
     "description": "A debugbar dedicated for phalcon slayer",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "PhalconslayerLibs\\Debugbar\\": "src/"
