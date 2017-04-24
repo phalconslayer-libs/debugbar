@@ -1,0 +1,12 @@
+{
+    "name": "phalconslayer-libs/debugbar",
+    "description": "A debugbar dedicated for phalcon slayer",
+    "autoload": {
+        "psr-4": {
+            "PhalconslayerLibs\\Debugbar\\": "src/"
+        }
+    },
+    "require": {
+        "snowair/phalcon-debugbar": "1.2.*"
+    }
+}
