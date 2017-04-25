@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
      |--------------------------------------------------------------------------
@@ -10,8 +10,35 @@ return array(
      | Debugbar is enabled by default, when debug is set to true in app.php.
      |
      */
-
     'enabled' => true,
+
+
+    /*
+     |--------------------------------------------------------------------------
+     | Routing Settings
+     |--------------------------------------------------------------------------
+     |
+     | Change the route configurations.
+     |
+     */
+    'routing' => [
+        'namespace' => 'Snowair\Debugbar\Controllers',
+
+        'open' => [
+            'controller' => 'OpenHandlerController',
+            'action' => 'handleAction',
+        ],
+
+        'css' => [
+            'controller' => 'AssetController',
+            'action' => 'cssAction',
+        ],
+
+        'js' => [
+            'controller' => 'AssetController',
+            'action' => 'jsAction',
+        ],
+    ],
 
     /*
      |--------------------------------------------------------------------------
@@ -21,28 +48,32 @@ return array(
      | 'file' driver is the only supported now.
      |
      */
-    'storage' => array(
+    'storage' =>  [
         'enabled' => true,
-        'driver' => 'file', // file, mongodb, elastic
-        'path' => '../storage/slayer/debugbar', // For file driver
-        'mongodb' => array(  // mongodb driver
+        # file, mongodb, elastic
+        'driver' => 'file',
+        # for file driver
+        'path' => '../storage/slayer/debugbar',
+        # mongodb driver
+        'mongodb' =>  [
                              'connection' => 'mongodb://localhost:27017',
                              'db'=>'debugbar',
                              'collection' => 'debugbar',
-                             'options'=>array(),
-        ),
-        'elastic' => array(  // elasticsearch driver
-                             'hosts' => ['localhost:9200'],
-                             'index'=>'debugbar',
-                             'type' => 'debugbar',
-                             'connection_params'=>array(),
-                             'ssl'=>array(
-                                 'key'=>'',
-                                 'cert'=>'',
-                                 'verify'=>'',
-                             ),
-        ),
-    ),
+                             'options'=> [],
+        ],
+        # elasticsearch driver
+        'elastic' => [
+             'hosts' => ['localhost:9200'],
+             'index' =>'debugbar',
+             'type' => 'debugbar',
+             'connection_params' => [],
+             'ssl' => [
+                 'key' => '',
+                 'cert' => '',
+                 'verify' => '',
+             ],
+        ],
+    ],
 
     /*
      |--------------------------------------------------------------------------
@@ -53,14 +84,19 @@ return array(
      | the values are clients IPs, if allow all ips, leave  a empty array.
      |
      */
-    'white_lists'=>array(
-        //        '127.0.0.1'
-    ),
+    'white_lists'=> [
+        // '127.0.0.1',
+    ],
 
-
-    'allow_users'=>array(
-
-    ),
+    /*
+     |--------------------------------------------------------------------------
+     | Safe check: Allowed Users settings
+     |--------------------------------------------------------------------------
+     |
+     | the values are user names.
+     |
+     */
+    'allow_users'=> [],
 
     /*
      |--------------------------------------------------------------------------
@@ -70,9 +106,7 @@ return array(
      | the values are route names.
      |
      */
-    'allow_routes'=>array(
-
-    ),
+    'allow_routes'=> [],
 
     /*
      |--------------------------------------------------------------------------
@@ -82,9 +116,7 @@ return array(
      | the values are route names.
      |
      */
-    'deny_routes'=>array(
-
-    ),
+    'deny_routes' => [],
 
 
     /*
@@ -108,7 +140,7 @@ return array(
      | Capture Ajax Requests
      |--------------------------------------------------------------------------
      |
-     | The Debugbar can capture Ajax requests and display them. If you don't want this (ie. because of errors),
+     | The Debugbar can capture Ajax requests and display them. If you don't want this (ie. because of errors],
      | you can use this option to disable sending the data through the headers.
      |
      */
@@ -124,7 +156,7 @@ return array(
      |
      */
 
-    'collectors' => array(
+    'collectors' =>  [
         'memory'          => true,  // Memory usage
         'exceptions'      => true,  // Exception displayer
         'default_request' => false, // Regular or special Symfony request logger
@@ -138,7 +170,7 @@ return array(
         'view'            => false, // Display the rendered views infomations.
         'cache'           => false, // Display the cache operation infomations.
         'mail'            => false,
-    ),
+    ],
 
     /*
      |--------------------------------------------------------------------------
@@ -148,37 +180,36 @@ return array(
      | Configure some DataCollectors
      |
      */
-
-    'options' => array(
-        'exceptions'=>array(
-            'chain'=>true,
-        ),
-        'db' => array(
-            'with_params'       => false,   // Render SQL with the parameters substituted
+    'options' => [
+        'exceptions' => [
+            'chain' => true,
+        ],
+        'db' =>  [
+            'with_params' => false,   // Render SQL with the parameters substituted
             'backtrace' => false,  // EXPERIMENTAL: Use a backtrace to find the origin of the query in your files.
-            'explain'   => false,  // EXPLAIN select statement
-            'error_mode'=> \PDO::ERRMODE_EXCEPTION, // \PDO::ERRMODE_SILENT , \PDO::ERRMODE_WARNING, \PDO::ERRMODE_EXCEPTION
-            'show_conn'=>false, // IF show connection info
-        ),
-        'mail' => array(
+            'explain' => false,  // EXPLAIN select statement
+            'error_mode' => \PDO::ERRMODE_EXCEPTION, // \PDO::ERRMODE_SILENT , \PDO::ERRMODE_WARNING, \PDO::ERRMODE_EXCEPTION
+            'show_conn' =>false, // IF show connection info
+        ],
+        'mail' =>  [
             'full_log' => false
-        ),
-        'views' => array(
+        ],
+        'views' =>  [
             'data' => false,    //Note: Can slow down the application, because the data can be quite large..
-        ),
-        'config'=> array(
-            'protect'=>array(
+        ],
+        'config' =>  [
+            'protect'=> [
                 'database.password', // 在debugbar中以******显示的敏感内容, 最多支持使用两次.号
-            ),
-        ),
-        'log'=>array(
+            ],
+        ],
+        'log' => [
             'aggregate'=>false,  // Set to True will aggregate logs to MessagesCollector
             'formatter'=>'line', // line , syslog or a class implenment \Phalcon\Logger\FormatterInterface
-        ),
-        'cache'=>array(
+        ],
+        'cache' => [
             'mode'=>1, // 0: only count and aggregate summary to MessagesCollector; 1: show detail on CacheCollector
-        ),
-    ),
+        ],
+    ],
 
     /*
      |--------------------------------------------------------------------------
@@ -190,14 +221,12 @@ return array(
      | in your template yourself. See http://phpdebugbar.com/docs/rendering.html
      |
      */
-
     'inject' => true,
 
     /*
      * Warning: You must disable open handler for production environment.
      */
-    'open_handler'=>array(
-        'enable'=>true,
-    ),
-
-);
+    'open_handler'=> [
+        'enable' => true,
+    ],
+];
